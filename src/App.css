@@ -22,3 +22,21 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.card-list-hidden {
+    display: none;
+}
+
+.card-list-show {
+    display:block;
+}
+
+.thumbnail {
+    width: 200px;
+    height: 200px;
+}
+
+.thumbnail img{
+    width: 200px;
+    height: 190px;
+}
