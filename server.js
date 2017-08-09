@@ -4,10 +4,19 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 
-var app = express();
-var router = express.Router();
+let app = express();
+let router = express.Router();
+let schema = mongoose.Schema;
+let port = process.env.API_PORT || 3001;
 
-var port = process.env.API_PORT || 3001;
+let mongoDB = 'mongodb://test:test@ds145892.mlab.com:45892/mydb';
+mongoose.connect(mongoDB, { useMongoClient: true });
+
+let cardSchema = {
+    data: [] ,
+    status:String,
+    cards: String
+}
 
 //To prevent errors from Cross Origin Resource Sharing, we will set 
 //our headers to allow CORS with middleware like so:
@@ -27,6 +36,20 @@ app.use(function(req, res, next) {
 router.get(‘/’, function(req, res) {
  res.json({ message: ‘API Initialized!’});
 });
+
+router.route('/cards')
+    .get((req,res) =>{
+    cardSchema.find((err,cards) => {
+        console.log("inside get");
+        if(err)
+            res.send(err);
+        console.log(cards);
+        res.json(cards);
+    })
+});
+
+
+
 //Use our router configuration when we call /api
 app.use(‘/api’, router);
 //starts the server and listens for requests

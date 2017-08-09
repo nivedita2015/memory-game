@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Cards from './Cards';
+import axios from 'axios';
 
 class App extends Component {
     
@@ -18,11 +19,15 @@ class App extends Component {
     }
     
     handleStartGame(){
-        
         this.setState({cards: "card-list-show" });
-        
     }
     
+    componentDidMount(){
+        axios.get(this.props.url)
+            .then(res => {
+            console.log("printing response ",res);
+        })
+    }
     
     render() {
     return (

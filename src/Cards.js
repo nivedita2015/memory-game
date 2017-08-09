@@ -7,7 +7,7 @@ class Cards extends Component {
     render(){
          let card_list = this.props.data.map((child,i)=>{
              return (
-                <Col xs={6} md={3}>
+                <Col xs={6} md={3} key={i}>
                     <Card num = { child } />
                 </Col>
             );
